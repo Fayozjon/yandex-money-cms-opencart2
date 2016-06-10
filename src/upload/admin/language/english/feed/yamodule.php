@@ -44,8 +44,8 @@ $_['market_unch_all']          = 'Убрать все отметки';
 $_['market_sv']          = 'Сохранить';
 $_['market_gen']          = 'Генерировать';
 $_['market_prostoy']          = 'Упрощённый yml:';
-$_['text_success']       = 'Настройки модуля обновлены!';
-
+$_['text_success']       = 'Настройки сохранены';
+//success_alert
 // kassa
 $_['kassa_text_connect']       = "Для работы с приложением необходимо подключить магазин к <a target=\"_blank\" href=\"https://kassa.yandex.ru/\">Яндекс.Кассе</a>";
 $_['kassa_text_enable']       = 'Включить приём платежей через Кассу';
@@ -71,6 +71,16 @@ $_['kassa_text_scid']       = "Номер витрины магазина";
 $_['kassa_text_sid']       = "Идентификатор магазина";
 $_['kassa_text_get_setting']       = "Shop ID, scid, shopPassword можно посмотреть в <a href='https://money.yandex.ru/joinups' target='_blank'>личном кабинете</a> после подключения Яндекс.Кассы.";
 $_['kassa_text_lk_head']       = "Параметры из личного кабинета Яндекс.Кассы";
+
+$_['kassa_text_inv']       = "Вставление счетов по электронной почте";
+$_['kassa_text_invhelp']       = "Шаблон письма";
+$_['kassa_text_inv_subj']       = "Тема";
+$_['kassa_text_inv_subjhelp']       = "";
+$_['kassa_text_inv_logo']       = "Добавить к письму логотип магазина";
+$_['kassa_text_inv_logohelp']       = "";
+$_['kassa_text_inv_text']       = "Дополнительный текст";
+$_['kassa_text_inv_texthelp']       = "Этот текст появится в письме после суммы и кнопки «Заплатить»: напишите здесь важную для покупателя информацию или оставьте поле пустым.";
+$_['kassa_text_inv_pattern']       = "Вы можете использовать %order-id%,%shop_name%";
 
 $_['kassa_ym']       = 'Оплата из кошелька в Яндекс.Деньгах.';
 $_['kassa_wm']       = 'Оплата из кошелька в системе WebMoney.';
@@ -131,7 +141,7 @@ $_['pokupki_callback']       = 'Ссылка для приложения';
 $_['p2p_sv']       = 'Сохранить';
 $_['p2p_text_connect']          = "Для работы с модулем нужно <a href='https://money.yandex.ru/new' target='_blank'>открыть кошелек</a> на Яндексе и <a href='https://sp-money.yandex.ru/myservices/online.xml' target='_blank'>зарегистрировать приложение</a> на сайте Яндекс.Денег								";
 $_['p2p_text_enable']          = "Включить прием платежей в кошелек на Яндексе";
-$_['p2p_text_url_help']          = "Скопируйте эту ссылку в поле Redirect URL на <a href='https://sp-money.yandex.ru/myservices/online.xml' target='_blank'>странице регистрации приложения</a>";
+$_['p2p_text_url_help']          = "Скопируйте эту ссылку в поле Redirect URI на <a href='https://sp-money.yandex.ru/myservices/new.xml' target='_blank'>странице регистрации приложения</a>";
 $_['p2p_text_setting_head']          = "Настройки приема платежей";
 $_['p2p_text_account']          = "Номер кошелька";
 $_['p2p_text_appId']          = "Id приложения";

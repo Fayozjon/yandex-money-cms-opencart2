@@ -31,7 +31,11 @@ class ControllerFeedYamodule extends Controller {
 		'ya_kassa_ma',
 		'ya_kassa_qw',
 		'ya_kassa_qp',
-		'ya_kassa_os'
+		'ya_kassa_os',
+		'ya_kassa_inv',
+		'ya_kassa_inv_logo',
+		'ya_kassa_inv_message',
+		'ya_kassa_inv_subject'
 	);
 
 	public $fields_metrika = array(
@@ -126,16 +130,15 @@ class ControllerFeedYamodule extends Controller {
 			$data['kassa_status'][] = $this->errors_alert('SCID Не заполнен');
 
 		if (empty($data['market_status']))
-			$data['market_status'][] = $this->success_alert('Все необходимые настроки заполнены!');
+			$data['market_status'][] = '';//$this->success_alert('Все необходимые настроки заполнены!');
 		if (empty($data['kassa_status']))
-			$data['kassa_status'][] = $this->success_alert('Все необходимые настроки заполнены!');
+			$data['kassa_status'][] = '';//$this->success_alert('Все необходимые настроки заполнены!');
 		if (empty($data['p2p_status']))
-			$data['p2p_status'][] = $this->success_alert('Все необходимые настроки заполнены!');
+			$data['p2p_status'][] = '';//$this->success_alert('Все необходимые настроки заполнены!');
 		if (empty($data['metrika_status']))
-			$data['metrika_status'][] = $this->success_alert('Все необходимые настроки заполнены!');
+			$data['metrika_status'][] = '';//$this->success_alert('Все необходимые настроки заполнены!');
 		if (empty($data['pokupki_status']))
-			$data['pokupki_status'][] = $this->success_alert('Все необходимые настроки заполнены!');
-
+			$data['pokupki_status'][] = '';//$this->success_alert('Все необходимые настроки заполнены!');
 		return $data;
 	}
 
@@ -223,11 +226,13 @@ class ControllerFeedYamodule extends Controller {
 		$this->session->data['metrika_status'] = array();
 		$this->session->data['market_status'] = array();
 		$this->session->data['pokupki_status'] = array();
+		$this->load->language('feed/yamodule');
+
 		switch($this->request->post['type_data'])
 		{
 			case 'kassa':
 				$this->saveData($this->fields_kassa);
-				$this->session->data['kassa_status'][] = $this->success_alert('Настройки успешно сохранены!');
+				$this->session->data['kassa_status'][] = $this->success_alert($this->language->get('text_success'));
 				if($this->request->post['ya_kassa_active'] == 1){
 					$testUrl = $this->url->link('payment/yamodule/test', 'token=' . $this->session->data['token'], 'SSL');
 					$this->session->data['kassa_status'][] = '<div class="alert"><a  class="btn btn-success" target="_blank" href="'.$testUrl.'">Проверить работу модуля</a></div>';
@@ -236,25 +241,25 @@ class ControllerFeedYamodule extends Controller {
 				break;
 			case 'p2p':
 				$this->saveData($this->fields_p2p);
-				$this->session->data['p2p_status'][] = $this->success_alert('Настройки успешно сохранены!');
+				$this->session->data['p2p_status'][] = $this->success_alert($this->language->get('text_success'));
 				if($this->request->post['ya_p2p_active'] == 1)
 					$this->model_setting_setting->editSetting('ya_kassa_active', array('ya_kassa_active' => 0));
 				break;
 			case 'metrika':
 				$this->saveData($this->fields_metrika);
-				$this->session->data['metrika_status'][] = $this->success_alert('Данные метрики сохранены!');
+				$this->session->data['metrika_status'][] = $this->success_alert($this->language->get('text_success'));
 				$this->load->model('yamodule/metrika');
 				$yaMetrika_token = $this->config->get('ya_metrika_o2auth');
 				$yaMetrika_number = ($this->request->post['ya_metrika_number'] != $this->config->get('ya_metrika_number') ? $this->request->post['ya_metrika_number'] : $this->config->get('ya_metrika_number'));
 				$this->model_yamodule_metrika->processCounter($yaMetrika_number, $yaMetrika_token);
 				break;
 			case 'market':
-				$this->session->data['market_status'][] = $this->success_alert('Настройки успешно сохранены!');
+				$this->session->data['market_status'][] = $this->success_alert($this->language->get('text_success'));
 				$this->saveData($this->fields_market);
 				break;
 			case 'pokupki':
 				$this->saveData($this->fields_pokupki);
-				$this->session->data['pokupki_status'][] = $this->success_alert('Настройки успешно сохранены!');
+				$this->session->data['pokupki_status'][] = $this->success_alert($this->language->get('text_success'));
 				break;
 			
 		}
@@ -550,6 +555,8 @@ class ControllerFeedYamodule extends Controller {
 			'kassa_text_status','kassa_text_debug_help','kassa_text_debug_dis','kassa_text_debug_en','kassa_text_debug','kassa_text_adv_head',
 			'kassa_text_pay_help','kassa_text_paymode_help','kassa_text_paymode_shop','kassa_text_paymode_kassa','kassa_text_paymode_label',
 			'kassa_text_paymode_head','kassa_text_pw','kassa_text_scid','kassa_text_sid','kassa_text_get_setting','kassa_text_lk_head','kassa_sv',
+			'kassa_text_inv', 'kassa_text_invhelp', 'kassa_text_inv_subj','kassa_text_inv_subjhelp','kassa_text_inv_logo','kassa_text_inv_logohelp',
+			'kassa_text_inv_text', 'kassa_text_inv_texthelp','kassa_text_inv_pattern',
 			'p2p_text_connect','p2p_text_enable','p2p_text_url_help','p2p_text_setting_head','p2p_text_account','p2p_text_appId','p2p_text_appWord','p2p_text_app_help',
 			'p2p_text_extra_head','p2p_text_debug',	'p2p_text_off',	'p2p_text_on','p2p_text_debug_help','p2p_text_status'
 		);
@@ -574,6 +581,7 @@ class ControllerFeedYamodule extends Controller {
 		$data['metrika_set_5'] = $this->language->get('metrika_set_5');
 		$data['celi_cart'] = $this->language->get('celi_cart');
 		$data['celi_order'] = $this->language->get('celi_order');
+
 		//MWS
 		$data['mws_global_error']= array();
 		if (!extension_loaded ('openssl')) $data['mws_global_error'][]= $this->language->get('ext_mws_openssl');
@@ -601,7 +609,7 @@ class ControllerFeedYamodule extends Controller {
 		$data['tab_row_sign'] = $this->language->get('tab_row_sign');
 		$data['tab_row_cause'] = $this->language->get('tab_row_cause');
 		$data['tab_row_primary'] = $this->language->get('tab_row_primary');
-				
+
 		$data['mws_orgname'] = HTTP_CATALOG;
 		$data['mws_cn'] = '/business/oc2/yacms-'.$this->Sget('ya_kassa_sid');
 		$data['mws_email'] = $this->Sget('config_email');
@@ -610,7 +618,6 @@ class ControllerFeedYamodule extends Controller {
 		$data['btn_mws_csr'] = $this->language->get('btn_mws_csr');
 		$data['btn_mws_doc'] = $this->language->get('btn_mws_doc');
 		$data['btn_mws_crt'] = $this->language->get('btn_mws_crt');
-
 		$data['btn_mws_crt_load'] = $this->language->get('btn_mws_crt_load');
 		// Common
 		$data['ya_version'] = $this->language->get('ya_version');
@@ -841,6 +848,7 @@ class ControllerFeedYamodule extends Controller {
 
 	public function uninstall()
 	{
+		$this->load->model('setting/setting');
 		$cu = $this->getCustomer($this->config->get('yandexbuy_customer'));
 		$this->model_setting_setting->editSetting('yamodule_status', array('yamodule_status' => 0));
 		$this->load->model('extension/extension');

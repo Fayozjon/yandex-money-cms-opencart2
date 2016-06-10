@@ -113,8 +113,9 @@ class ControllerYamoduleMws extends Controller {
 			$errors=array();
 			$return_error = array();
 
-			$return = new YamoduleReturn();
-						
+			//$return = new YamoduleReturn();
+			$this->load->model('yamodule/return');
+
 			$conf = $this->model_setting_setting->getSetting("yamodule_mws");
 			$sid = $this->model_setting_setting->getSetting("ya_kassa_sid");
 			$kassa_active = $this->model_setting_setting->getSetting("ya_kassa_active");
@@ -139,7 +140,7 @@ class ControllerYamoduleMws extends Controller {
 				if (!$return_error){
 					$respPayment = $mws->request('returnPayment', array('invoiceId'=> $payment['invoiceId'], 'amount'=>	$amount, 'cause'=>$cause));
 					if (isset($respPayment['status'])){
-						$return->addReturn(array(
+						$this->model_yamodule_return->addReturn(array(
 							'amount'=>$amount,
 							'cause'=>$cause,
 							'request'=>$mws->txt_request || 'NULL',
@@ -162,8 +163,8 @@ class ControllerYamoduleMws extends Controller {
 			$inv = (isset($payment['invoiceId']))?$payment['invoiceId']:0;
 			$inv_sum = (isset($payment['orderSumAmount']))?$payment['orderSumAmount']:0;
 			$inv_type = (isset($payment['paymentType']))?$payment['paymentType']:"none";
-			$data['return_items'] = $return->getSuccessReturns($inv);
-			$sum_returned = $return->sum;
+			$sum_returned = 0;
+			$data['return_items'] = $this->model_yamodule_return->getSuccessReturns($inv, $sum_returned);
 			$data['invoiceId'] = $inv;
 			
 			$data['return_sum_symbol']	= $this->currency->getSymbolRight();
@@ -475,23 +476,4 @@ Class YamoduleMws{
 	}
 }
 
-class YamoduleReturn{
-	public $sum;
-	public function addReturn($data){
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "mws_return` (`".implode("`,`",array_keys($data))."`)
-			VALUES ('".implode("','",array_values($data))."')");
-	}
-	public function getSuccessReturns($inv){
-		$data=array();
-		$order_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "mws_return` o WHERE o.invoice_id = '" . $inv."' ORDER BY `date` DESC");
-		$sum = 0;
-		if ($order_query->num_rows) {
-			$returns = array_filter($order_query->rows, function($row) { return ($row['status'] == '0');});
-			if ($returns) foreach ($returns as $k => $item) $sum += $item['amount'];
-			$this->sum = $sum;
-			return $returns;
-		}
-		return false;
-	}
-}
 ?>

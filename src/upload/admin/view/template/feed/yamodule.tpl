@@ -224,6 +224,56 @@
 										</div>
 									</div>
 								</div>
+									<!-- -->
+									<div class='row'>
+										<div class='col-sm-12'>
+											<div class="form-group">
+												<label class="col-sm-3 control-label"><?php echo $kassa_text_inv; ?></label>
+												<div class="col-sm-9">
+													<label class='radio-inline'>
+														<input type="radio" <?php echo (!$ya_kassa_inv ? ' checked="checked"' : ''); ?> name="ya_kassa_inv" value="0"> <?php echo $kassa_text_debug_dis; ?>
+													</label>
+													<label class='radio-inline'>
+														<input type="radio" <?php echo ($ya_kassa_inv ? ' checked="checked"' : ''); ?> name="ya_kassa_inv" value="1"> <?php echo $kassa_text_debug_en; ?>
+													</label>
+													<p class="help-block"></p>
+												</div>
+												<div class='col-sm-8 col-sm-offset-3'>
+													<p class="help-block"><?php echo $kassa_text_inv_pattern; ?></p>
+												</div>
+												<div class="invoice-setting form-horizontal">
+													<label class="col-sm-3 control-label"><?php echo $kassa_text_invhelp; ?></label>
+													<div class="col-sm-9">
+														<label for='ya_kassa_inv_subject' class="col-sm-3 control-label"><?php echo $kassa_text_inv_subj; ?></label>
+														<div class="col-sm-9">
+															<input name="ya_kassa_inv_subject" class="form-control" value="<?php echo $ya_kassa_inv_subject; ?>" id="ya_kassa_inv_subject">
+															<p class="help-block"><?php echo $kassa_text_inv_subjhelp; ?></p>
+														</div>
+													</div>
+													<label class="col-sm-3 control-label"></label>
+													<div class="col-sm-9">
+														<label for="ya_kassa_inv_message" class="col-sm-3 control-label"><?php echo $kassa_text_inv_text; ?></label>
+														<div class="col-sm-9">
+															<textarea name="ya_kassa_inv_message" id="ya_kassa_inv_message" class="form-control"><?php echo $ya_kassa_inv_message; ?></textarea>
+															<p class="help-block"><?php echo $kassa_text_inv_texthelp; ?></p>
+														</div>
+													</div>
+													<label class="col-sm-3 control-label"></label>
+													<div class="col-sm-9">
+														<div class="col-sm-3"></div>
+														<div class="col-sm-9">
+															<div class='checkbox-inline'>
+																<input class="" type="checkbox" <?php echo (!$ya_kassa_inv_logo ? ' checked="checked"' : ''); ?> name="ya_kassa_inv_logo" value="1">
+																<?php echo $kassa_text_inv_logo; ?>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- -->
+											</div>
+										</div>
+									</div>
+									<!-- -->
 								</form>
 								<?php }  else { ?>
 								<div class="alert alert-danger">
@@ -768,6 +818,15 @@
 <script type="text/javascript"><!--
 var step = new Array();
 var total = 0;
+	triggerInvoiceSetting();
+	function triggerInvoiceSetting(){
+		if($('input[name=ya_kassa_inv]:checked').val()==1){
+			$('.invoice-setting').show();
+		}else{
+			$('.invoice-setting').hide();
+		}
+	}
+$('input[name=ya_kassa_inv]').bind('click', triggerInvoiceSetting);
 $('#mws_csr_gen').bind('click', function() {
 	if (confirm('<?php echo $lbl_mws_alert; ?>')) {
 		$.ajax({
