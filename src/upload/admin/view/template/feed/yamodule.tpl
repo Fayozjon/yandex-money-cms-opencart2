@@ -201,10 +201,10 @@
 												<label for="ya_debugmode" class="col-sm-3 control-label"><?php echo $kassa_text_debug; ?></label>
 												<div class="col-sm-9">
 													<label class='radio-inline'>
-														<input type="radio" <?php echo (!$ya_kassa_log ? ' checked="checked"' : ''); ?> name="ya_kassa_log" value="0"> <?php echo $kassa_text_debug_dis; ?>
+														<input type="radio" <?php echo ($ya_kassa_log ? ' checked="checked"' : ''); ?> name="ya_kassa_log" value="1"> <?php echo $kassa_text_debug_en; ?>
 													</label>
 													<label class='radio-inline'>
-														<input type="radio" <?php echo ($ya_kassa_log ? ' checked="checked"' : ''); ?> name="ya_kassa_log" value="1"> <?php echo $kassa_text_debug_en; ?>
+														<input type="radio" <?php echo (!$ya_kassa_log ? ' checked="checked"' : ''); ?> name="ya_kassa_log" value="0"> <?php echo $kassa_text_debug_dis; ?>
 													</label>
 													<p class="help-block"><?php echo $kassa_text_debug_help; ?></p>
 												</div>
@@ -231,10 +231,10 @@
 												<label class="col-sm-3 control-label"><?php echo $kassa_text_inv; ?></label>
 												<div class="col-sm-9">
 													<label class='radio-inline'>
-														<input type="radio" <?php echo (!$ya_kassa_inv ? ' checked="checked"' : ''); ?> name="ya_kassa_inv" value="0"> <?php echo $kassa_text_debug_dis; ?>
+														<input type="radio" <?php echo ($ya_kassa_inv ? ' checked="checked"' : ''); ?> name="ya_kassa_inv" value="1"> <?php echo $kassa_text_debug_en; ?>
 													</label>
 													<label class='radio-inline'>
-														<input type="radio" <?php echo ($ya_kassa_inv ? ' checked="checked"' : ''); ?> name="ya_kassa_inv" value="1"> <?php echo $kassa_text_debug_en; ?>
+														<input type="radio" <?php echo (!$ya_kassa_inv ? ' checked="checked"' : ''); ?> name="ya_kassa_inv" value="0"> <?php echo $kassa_text_debug_dis; ?>
 													</label>
 													<p class="help-block"></p>
 												</div>
@@ -736,7 +736,7 @@
 									<div class="form-group">
 										<label class="col-sm-4 control-label" for="ya_pokupki_yapi"><?php echo $pokupki_yapi; ?></label>
 										<div class="col-sm-8">
-											<input type="text" name="ya_pokupki_yapi" value="<?php echo $ya_pokupki_yapi; ?>" id="ya_pokupki_yapi" class="form-control"/>
+											<input type="text" name="ya_pokupki_yapi" value="https://api.partner.market.yandex.ru/v2/" id="ya_pokupki_yapi" disabled="disabled" class="form-control disable"/>
 										</div>
 									</div>
 									<div class="form-group">
@@ -795,6 +795,31 @@
 											</div>
 										</div>
 									</div>
+									<!-- -->
+									<div class="form-horizontal">
+										<div class="form-group">
+										<label class="col-sm-4 control-label"><?php echo $pokupki_text_status; ?></label>
+										<div class="col-sm-8">
+											<?php foreach(array('pickup','cancelled','delivery','processing','unpaid','delivered') as $val){?>
+												<div class="">
+													<label class="control-label col-sm-5"><?php echo ${'pokupki_text_status_'.$val}; ?></label>
+													<div class='col-sm-7'>
+														<select name="ya_pokupki_status_<?php echo $val; ?>" id="ya_pokupki_status_<?php echo $val; ?>" class="form-control">
+															<?php foreach ($order_statuses as $order_status) { ?>
+																<?php if ($order_status['order_status_id'] == ${'ya_pokupki_status_'.$val}) { ?>
+																	<option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
+																<?php } else { ?>
+																	<option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
+																<?php } ?>
+															<?php } ?>
+														</select>
+													</div>
+												</div>
+											<?php }?>
+											</div>
+										</div>
+									</div>
+									<!-- -->
 									<div class="form-group">
 										<label class="col-sm-4 control-label" for="ya_pokupki_callback"><?php echo $pokupki_callback; ?></label>
 										<div class="col-sm-8">

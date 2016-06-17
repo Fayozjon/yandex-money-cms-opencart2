@@ -1,6 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+    /*.button__pay {
+        background: #FFDB4D;
+        border-radius: 4px;
+        height: 64px;
+        width: 155px;
+        outline: 0px;
+        border: 0px;
+        transition: 0.1s ease-out 0s all;
+    }
+
+    .button__pay:hover {
+        background: #ffd633;
+        transition: 0.1s ease-out 0s all;
+        cursor: pointer;
+    }
+
+    .button__pay:active {
+        background: #FFcc00;
+        cursor: pointer;
+    }
+
+    .button__text {
+        color: #000;
+        font-size: 20px;
+        line-height: 26px;
+        font-family: YandexSansTextApp-Regular, Arial, Helvetica, sans-serif;
+        padding: 0 20px;
+        text-align: center;
+        transition: 0.3s ease-out 0s all;
+        cursor: pointer;
+    }
+
+    .button__subtext {
+        color: #000;
+        font-size: 12px;
+        font-family: YandexSansTextApp-Light, Arial, Helvetica, sans-serif;
+        padding: 0 20px;
+        text-align: center;
+        transition: 0.3s ease-out 0s all;
+        cursor: pointer;
+    }
+
+    .fly {
+        box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.12), 0 5px 10px -3px rgba(0, 0, 0, 0.3);;
+    }*/
+</style>
+</head>
+<body>
 <div>
     <div style="margin:0;padding:0;">
-        <div style="display:none;font-size:1px;color:#f6f5f3;line-height:1px;max-height:0px;max-width:0px;overflow:hidden;"> К оплате 3.00 руб. </div>
         <table cellpadding="0" cellspacing="0" width="100%" height="auto" style="border-collapse:collapse;">
             <tbody>
             <tr>
@@ -130,91 +180,73 @@
                                             <table border="0" cellspacing="1" align="center"  width = "80%">
                                                 <tr>
                                                     <td align="center">
-                                                        <div class='input__pay fly'>
-                                                            <a href="<?php echo $link; ?>" class='cmd' type='submit' value=''></a>
-                                                                <span class="text1" style="position:relative;left:-0px;top:-53px;color:#000;font-size:20px;line-height:26px;font-family:YandexSansTextApp-Regular,Arial,Helvetica,sans-serif;padding:0 20px;text-align:center;transition:0.3s ease-out 0s all;cursor:pointer;z-index:1;">Заплатить</span>
-                                                                <span class="text2" style="position: relative;
-                                                    left: -0;
-                                                    top: -55px;
-                                                    color: #000;
-                                                    font-size: 12px;
-                                                    font-family: YandexSansTextApp-Light, Arial, Helvetica, sans-serif;
-                                                    padding: 0 20px;
-                                                    text-align: center;
-                                                    transition: 0.3s ease-out 0s all;
-                                                    cursor: pointer;
-                                                    z-index: 1;">через Яндекс</span>
-
-                                                        </div>
+                                                        <!--<form action="<?php echo $link; ?>" method="GET">
+                                                            <button class="" style="{background: #FFDB4D; border-radius: 4px;height: 64px;width: 155px;outline: 0px;border: 0px;transition: 0.1s ease-out 0s all;}:active {background: #FFcc00; cursor: pointer;} :hover {background: #ffd633; transition: 0.1s ease-out 0s all; cursor: pointer;}">
+                                                                <span class="" style="color: #000;font-size: 20px;line-height: 26px;font-family: YandexSansTextApp-Regular, Arial, Helvetica, sans-serif;padding: 0 20px;text-align: center;transition: 0.3s ease-out 0s all;cursor: pointer;">Заплатить</span><br/>
+                                                                <span class="" style="color: #000;font-size: 12px;font-family: YandexSansTextApp-Light, Arial, Helvetica, sans-serif;padding: 0 20px;text-align: center;transition: 0.3s ease-out 0s all;cursor: pointer;">через Яндекс</span>
+                                                            </button>-->
+                                                            <div style="
+  text-align: center;
+  background: #FFDB4D;
+  border-radius: 4px;
+  height: 64px;
+  width: 155px;
+  outline: 0;
+  border: 0;
+  transition: 0.1s ease-out 0s all;
+  cursor: pointer;
+ :hover {
+  background: #ffd633;
+  transition: 0.1s ease-out 0s all;
+  cursor: pointer;
+}:active {
+  background: #FFcc00;
+  cursor: pointer;
+}" class="yamoney-pay-button yamoney-pay-button_type_fly">
+                                                                <a href="<?php echo $link; ?>"
+                                                                    style="background: #FFDB4D;
+                                                                    text-decoration: none;
+  border-radius: 4px;
+  display: block;
+  height: 64px;
+  width: 155px;
+  position: relative;
+  opacity: 0;
+  z-index: 2;
+  outline: 0;
+  border: 0;
+  transition: 0.1s ease-out 0s all;
+  cursor: pointer;" type="submit" class="yamoney-pay-button__pay">
+                                                                <span style="
+  position: relative;
+  left: 0px;
+  top: -53px;
+  color: #000;
+  font-size: 20px;
+  line-height: 26px;
+  font-family: YandexSansTextApp-Regular, Arial, Helvetica, sans-serif;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+" class="yamoney-pay-button__text">Заплатить</span><br/>
+                                                                <span style="
+  position: relative;
+  left: 0px;
+  top: -55px;
+  color: #000;
+  font-size: 12px;
+  font-family: YandexSansTextApp-Light, Arial, Helvetica, sans-serif;
+  padding: 0px 20px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1;
+" class="yamoney-pay-button__subtext">через Яндекс</span></a>
+                                                            </div>
+                                                        <!--</form>-->
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <style type="text/css">
-                                                .fly {
-                                                    box-shadow: 0px 1px 0px 0px rgba(0,0,0,0.12), 0 5px 10px -3px rgba(0, 0, 0, 0.3);;
-                                                }
-                                                .text1 {
-                                                    position: relative;
-                                                    left: -0px;
-                                                    top: -53px;
-                                                    color: #000;
-                                                    font-size: 20px;
-                                                    line-height: 26px;
-                                                    font-family: YandexSansTextApp-Regular, Arial, Helvetica, sans-serif;
-                                                    padding: 0 20px;
-                                                    text-align: center;
-                                                    transition: 0.3s ease-out 0s all;
-                                                    cursor: pointer;
-                                                    z-index: 1;
-                                                }
-                                                .text2 {
-                                                    position: relative;
-                                                    left: -0;
-                                                    top: -55px;
-                                                    color: #000;
-                                                    font-size: 12px;
-                                                    font-family: YandexSansTextApp-Light, Arial, Helvetica, sans-serif;
-                                                    padding: 0 20px;
-                                                    text-align: center;
-                                                    transition: 0.3s ease-out 0s all;
-                                                    cursor: pointer;
-                                                    z-index: 1;
-                                                }
-                                                .cmd {
-                                                    position: relative;
-                                                    left: 0;
-                                                    top: 0;
-                                                    /*background: #FFDB4D;*/
-                                                    opacity: 0;
-                                                    border-radius: 4px;
-                                                    outline: 0px;
-                                                    border: 0px;
-                                                    transition: 0.1s ease-out 0s all;
-                                                    display:block;
-                                                    height: 100%;
-                                                    width:100%;
-                                                    z-index: 2;
-                                                    cursor: pointer;
-                                                }
-                                                .input__pay:hover {
-                                                    background: #ffd633;
-                                                    transition: 0.1s ease-out 0s all;
-                                                    /*cursor: pointer;*/
-                                                }
-                                                .input__pay:active {
-                                                    background: #FFcc00;
-                                                    /*cursor: pointer;*/
-                                                }
-                                                .input__pay {
-                                                    background: #FFDB4D;
-                                                    border-radius: 4px;
-                                                    height: 64px;
-                                                    width: 155px;
-                                                    outline: 0px;
-                                                    border: 0px;
-                                                    transition: 0.1s ease-out 0s all;
-                                                }
-                                            </style>
+
                                             <!-- -->
                                         </td>
                                     </tr>
@@ -228,7 +260,7 @@
                                     <tr>
                                         <td>
                                             <span>
-                                            <font color="#999999" size="2" face="Arial">Счет выставлен через <a href="https://kassa.yandex.ru/" target="_blank" style="font-weight:normal;text-decoration:none;cursor:pointer;">
+                                            <font color="#999999" size="2" face="Arial">Счет выставлен через <a href="https://github.com/yandex-money/yandex-money-cms-opencart2" target="_blank" style="font-weight:normal;text-decoration:none;cursor:pointer;">
                                                     <font color="#666699" size="2" face="Arial">модуль Y.CMS</font>
                                                 </a>
                                             </font>
@@ -269,3 +301,5 @@
         </table>
     </div>
 </div>
+</body>
+</html>
